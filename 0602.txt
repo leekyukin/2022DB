@@ -1,884 +1,138 @@
-{\rtf1\ansi\ansicpg949\cocoartf2638
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 Courier;\f1\fnil\fcharset129 AppleSDGothicNeo-Regular;\f2\fnil\fcharset0 Menlo-Regular;
-\f3\fmodern\fcharset0 Courier-Oblique;}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;}
-{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c99971\c0;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+-- auto-generated definition
+-- Unexpected: LocalDataSource
+show databases;
+create database community_site;
+use community_site;
 
-\f0\fs29 \cf2 \cb3 -- auto-generated definition\
--- Unexpected: LocalDataSource\
-show databases;\
-create database community_site;\
-use community_site;\
-\
--- 
-\f1 \cb3 \'c5\'d7\'c0\'cc\'ba\'ed
-\f2 \cb3  
-\f1 \cb3 \'bb\'fd\'bc\'ba
-\f2 \cb3 \
+-- 테이블 생성
+create table MyUser (
+  user_seq INT(8) auto_increment,
+  id varchar(20),
+  user_name varchar(20),
+  datetime date,
+  primary key (user_seq)
+);
 
-\f0 \cb3 create table MyUser (\
-  user_seq INT(8) auto_increment,\
-  id varchar(20),\
-  user_name varchar(20),\
-  datetime date,\
-  primary key (user_seq)\
-);\
-\
-create table Category (\
-  category_seq INT(8) auto_increment,\
-  name varchar(20),\
-  primary key (category_seq)\
-);\
-\
-create table POST (\
-    post_seq int(8) auto_increment,\
-    category_seq int(8),\
-    user_seq int(8),\
-    title varchar(40),\
-    content varchar(4000),\
-    datetime date,\
-    primary key (post_seq),\
-    FOREIGN KEY (category_seq) REFERENCES Category (category_seq),\
-    FOREIGN KEY (user_seq) REFERENCES MyUser (user_seq)\
-);\
-\
-create table MyComment (\
-    comment_seq int(8) auto_increment,\
-    post_seq int(8),\
-    user_seq int(8),\
-    content varchar(4000),\
-    datetime date,\
-    parent int(8),\
-    primary key (comment_seq),\
-    foreign key (post_seq) references POST (category_seq),\
-    foreign key (user_seq) references MyUser (user_seq),\
-    foreign key (parent) references MyComment (comment_seq)\
-);\
-\
--- 
-\f1 \cb3 \'b0\'aa
-\f2 \cb3  
-\f1 \cb3 \'bb\'f0\'c0\'d4
-\f2 \cb3 \
-\
+create table Category (
+  category_seq INT(8) auto_increment,
+  name varchar(20),
+  primary key (category_seq)
+);
 
-\f0 \cb3 select *\
-from MyUser;\
-\
-insert into MyUser (id, user_name, datetime)\
-values ("lee1545", "
-\f1 \cb3 \'c0\'cc\'bc\'f8\'bd\'c5
-\f0 \cb3 ", "22/05/04");\
-insert into MyUser (id, user_name, datetime)\
-values ("lee1502", "
-\f1 \cb3 \'c0\'cc\'c8\'b2
-\f0 \cb3 ", "22/05/01");\
-insert into MyUser (id, user_name, datetime)\
-values ("lee1536", "
-\f1 \cb3 \'c0\'cc\'c0\'cc
-\f0 \cb3 ", "22/05/02");\
-insert into MyUser (id, user_name, datetime)\
-values ("lee1397", "
-\f1 \cb3 \'bc\'bc\'c1\'be\'b4\'eb\'bf\'d5
-\f0 \cb3 ", "22/05/03");\
-insert into MyUser (id, user_name, datetime)\
-values ("shin1504", "
-\f1 \cb3 \'bd\'c5\'bb\'e7\'c0\'d3\'b4\'e7
-\f0 \cb3 ", "22/05/05");\
-\
-select *\
-from Category;\
-\
-insert into Category (name)\
-values ("
-\f1 \cb3 \'b0\'f8\'c1\'f6
-\f0 \cb3 ");\
-insert into Category (name)\
-values ("
-\f1 \cb3 \'b4\'ba\'bd\'ba
-\f0 \cb3 ");\
-insert into Category (name)\
-values ("
-\f1 \cb3 \'b4\'eb\'c8\'ad\'b8\'b6\'b4\'e7
-\f0 \cb3 ");\
-\
-select *\
-from POST;\
-\
-insert into POST (category_seq, user_seq, title, content, datetime)\
-values (1,1,"
-\f1 \cb3 \'c7\'d0\'c0\'cd\'c1\'f8
-\f2 \cb3  
-\f1 \cb3 \'c1\'f8\'b9\'fd
-\f0 \cb3 ",\
-        "
-\f1 \cb3 \'b1\'e2\'ba\'bb\'c0\'ba
-\f2 \cb3  
-\f1 \cb3 \'c0\'fc\'bb\'e7\'bf\'a1\'bc\'ad
-\f2 \cb3  
-\f1 \cb3 \'b1\'e2\'c1\'f8\'d0\'f4\'f2\'e6\'c0\'b8\'b7\'ce
-\f2 \cb3  
-\f1 \cb3 \'c0\'af\'b8\'ed\'c7\'d1
-\f2 \cb3  
-\f1 \cb3 \'b8\'c1\'c4\'a1\'bf\'cd
-\f2 \cb3  
-\f1 \cb3 \'b8\'f0\'b7\'e7
-\f0 \cb3 (
-\f1 \cb3 \'c7\'c9\'bc\'ad
-\f2 \cb3  
-\f1 \cb3 \'c5\'ac\'b7\'ce\'bf\'ec
-\f0 \cb3 )
-\f1 \cb3 \'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'c0\'fc\'b9\'fd\'bf\'a1\'bc\'ad
-\f2 \cb3  
-\f1 \cb3 \'b3\'bb\'b7\'c1\'c4\'a1\'b4\'c2
-\f2 \cb3  
-\f1 \cb3 \'b8\'c1\'c4\'a1\'b8\'a6
-\f0 \cb3  2
-\f1 \cb3 \'b0\'b3\'b7\'ce
-\f2 \cb3  
-\f1 \cb3 \'c7\'cf\'bf\'a9
-\f2 \cb3  
-\f1 \cb3 \'bf\'ec\'c8\'b8\'bf\'cd
-\f2 \cb3  
-\f1 \cb3 \'c6\'f7\'c0\'a7\'b8\'a6
-\f2 \cb3  
-\f1 \cb3 \'b0\'e3\'c0\'b8\'b7\'ce
-\f2 \cb3  
-\f1 \cb3 \'b1\'b8\'bb\'e7\'c7\'cf\'b4\'c2
-\f2 \cb3  
-\f1 \cb3 \'b9\'e6\'b9\'fd\'c0\'cc\'b4\'d9
-\f0 \cb3 . 
-\f1 \cb3 \'c7\'d1\'b4\'cf\'b9\'df
-\f2 \cb3  
-\f1 \cb3 \'b9\'d9\'b8\'a3\'c4\'ab\'b0\'a1
-\f2 \cb3  
-\f1 \cb3 \'c4\'ad\'b3\'aa\'c0\'cc
-\f2 \cb3  
-\f1 \cb3 \'c0\'fc\'c5\'f5\'bf\'a1\'bc\'ad
-\f2 \cb3  
-\f1 \cb3 \'bf\'ec\'bc\'f6\'c7\'d1
-\f2 \cb3  
-\f1 \cb3 \'b1\'e2\'b5\'bf
-\f2 \cb3  
-\f1 \cb3 \'b1\'e2\'b8\'b6\'b1\'ba
-\f0 \cb3  2
-\f1 \cb3 \'ba\'ce\'b4\'eb\'b8\'a6
-\f2 \cb3  
-\f1 \cb3 \'c0\'cc\'bf\'eb\'c7\'cf\'b0\'ed
-\f2 \cb3  
-\f1 \cb3 \'c0\'da\'bd\'c5\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'b9\'e9\'c0\'fc\'bf\'ac\'b8\'b6
-\f2 \cb3  
-\f1 \cb3 \'b3\'eb\'c0\'e5\'b5\'e9\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'b8\'f0\'b7\'e7\'b7\'ce
-\f2 \cb3  
-\f1 \cb3 \'bb\'e7\'bf\'eb\'c7\'cf\'bf\'a9
-\f2 \cb3  
-\f1 \cb3 \'bd\'c2\'b8\'ae\'b8\'a6
-\f2 \cb3  
-\f1 \cb3 \'b0\'c5\'b5\'d7\'b4\'f8
-\f2 \cb3  
-\f1 \cb3 \'c0\'fc\'b9\'fd\'c0\'cc\'b4\'d9
-\f0 \cb3 . 
-\f1 \cb3 \'bc\'ad\'be\'e7\'c0\'ce\'b5\'e9\'c0\'ba
-\f2 \cb3  
-\f1 \cb3 \'c0\'cc\'b8\'a6
-\f2 \cb3  
-\f1 \cb3 \'c8\'e7\'c8\'f7
-\f2 \cb3  
-\f1 \cb3 \'c0\'cc\'c1\'df\'c6\'f7\'c0\'a7\'b6\'f3
-\f2 \cb3  
-\f1 \cb3 \'ba\'ce\'b8\'a3\'c1\'f6\'b8\'b8
-\f2 \cb3  
-\f1 \cb3 \'bd\'c7\'c0\'ba
-\f2 \cb3  
-\f1 \cb3 \'c7\'d0\'c0\'cd\'c1\'f8
-\f2 \cb3  
-\f1 \cb3 \'b1\'e2\'ba\'bb\'bf\'a1
-\f2 \cb3  
-\f1 \cb3 \'bf\'b9\'ba\'f1\'b1\'ba\'b4\'dc
-\f0 \cb3  2
-\f1 \cb3 \'b0\'b3\'b8\'a6
-\f2 \cb3  
-\f1 \cb3 \'c3\'df\'b0\'a1\'b7\'ce
-\f2 \cb3  
-\f1 \cb3 \'bf\'ee\'bf\'eb\'c7\'cf\'bf\'a9
-\f2 \cb3  
-\f1 \cb3 \'c6\'f7\'c0\'a7\'c1\'f8\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'bf\'cf\'bc\'ba\'bd\'c3\'c5\'b2
-\f2 \cb3  
-\f1 \cb3 \'c7\'fc\'c5\'c2\'b4\'d9
-\f0 \cb3 . 
-\f1 \cb3 \'c1\'ef
-\f0 \cb3 , 
-\f1 \cb3 \'c0\'cc\'b0\'cd\'c0\'ba
-\f2 \cb3  
-\f1 \cb3 \'be\'ee\'b5\'f0\'b1\'ee\'c1\'f6\'b3\'aa
-\f2 \cb3  
-\f1 \cb3 \'bf\'ec\'bf\'f9\'c7\'d1
-\f2 \cb3  
-\f1 \cb3 \'b1\'e2\'b8\'b6\'ba\'b4\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'b1\'e2\'b5\'bf\'bc\'ba\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'c0\'cc\'bf\'eb\'c7\'d1
-\f2 \cb3  
-\f1 \cb3 \'c0\'b0\'bb\'f3\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'c1\'f8\'b9\'fd\'c0\'cc\'b6\'f5
-\f2 \cb3  
-\f1 \cb3 \'b0\'cd\'c0\'cc\'b4\'d9
-\f0 \cb3 .",\
-        "1592/08/14");\
-insert into POST (category_seq, user_seq, title, content, datetime)\
-values (3,4,"
-\f1 \cb3 \'c8\'c6\'b9\'ce\'c1\'a4\'c0\'bd
-\f0 \cb3 ",\
-        "
-\f1 \cb3 \'c8\'c6\'b9\'ce\'c1\'a4\'c0\'bd
-\f0 \cb3 (
-\f1 \cb3 \'fd\'ba\'da\'c5\'ef\'e1\'eb\'e5
-\f0 \cb3 )
-\f1 \cb3 \'c0\'ba
-\f2 \cb3  
-\f1 \cb3 \'b9\'e9\'bc\'ba\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'b0\'a1\'b8\'a3\'c4\'a1\'b4\'c2
-\f2 \cb3  
-\f1 \cb3 \'b9\'d9\'b8\'a5
-\f2 \cb3  
-\f1 \cb3 \'bc\'d2\'b8\'ae\'b6\'f3\'b4\'c2
-\f2 \cb3  
-\f1 \cb3 \'b6\'e6\'c0\'cc\'b4\'d9
-\f0 \cb3 . 
-\f1 \cb3 \'c8\'c6\'b9\'ce\'c1\'a4\'c0\'bd\'c0\'cc\'b6\'f3\'b0\'ed
-\f2 \cb3  
-\f1 \cb3 \'ba\'ce\'b8\'a3\'b4\'c2
-\f2 \cb3  
-\f1 \cb3 \'b4\'eb\'bb\'f3\'c0\'ba
-\f2 \cb3  
-\f1 \cb3 \'b5\'ce
-\f2 \cb3  
-\f1 \cb3 \'b0\'a1\'c1\'f6\'b0\'a1
-\f2 \cb3  
-\f1 \cb3 \'c0\'d6\'b4\'c2\'b5\'a5
-\f0 \cb3 , 
-\f1 \cb3 \'b1\'d7
-\f2 \cb3  
-\f1 \cb3 \'c7\'cf\'b3\'aa\'b4\'c2
-\f0 \cb3  1443
-\f1 \cb3 \'b3\'e2
-\f2 \cb3  
-\f1 \cb3 \'c0\'bd\'b7\'c2
-\f0 \cb3  12
-\f1 \cb3 \'bf\'f9
-\f0 \cb3 (
-\f1 \cb3 \'be\'e7\'b7\'c2
-\f0 \cb3  1444
-\f1 \cb3 \'b3\'e2
-\f0 \cb3  1
-\f1 \cb3 \'bf\'f9
-\f0 \cb3 )
-\f1 \cb3 \'bf\'a1
-\f2 \cb3  
-\f1 \cb3 \'bc\'bc\'c1\'be\'b4\'eb\'bf\'d5\'c0\'cc
-\f2 \cb3  
-\f1 \cb3 \'b8\'b8\'b5\'e7
-\f2 \cb3  
-\f1 \cb3 \'c7\'d1\'b1\'b9\'be\'ee\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'c7\'a5\'b1\'e2
-\f2 \cb3  
-\f1 \cb3 \'c3\'bc\'b0\'e8
-\f0 \cb3 , 
-\f1 \cb3 \'c1\'ef
-\f2 \cb3  
-\f1 \cb3 \'bf\'c0\'b4\'c3\'b3\'af\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'c7\'d1\'b1\'db\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'c3\'a2\'c1\'a6
-\f2 \cb3  
-\f1 \cb3 \'b4\'e7\'bd\'c3\'bf\'a1
-\f2 \cb3  
-\f1 \cb3 \'ba\'ce\'b8\'a5
-\f2 \cb3  
-\f1 \cb3 \'c0\'cc\'b8\'a7\'c0\'cc\'b0\'ed
-\f0 \cb3 , 
-\f1 \cb3 \'b6\'c7
-\f2 \cb3  
-\f1 \cb3 \'c7\'cf\'b3\'aa\'b4\'c2
-\f0 \cb3  1446
-\f1 \cb3 \'b3\'e2
-\f0 \cb3  9
-\f1 \cb3 \'bf\'f9
-\f0 \cb3 [1]
-\f1 \cb3 \'bf\'a1
-\f2 \cb3  
-\f1 \cb3 \'b9\'df\'b0\'a3\'b5\'c8
-\f2 \cb3  
-\f1 \cb3 \'c3\'a5
-\f2 \cb3  
-\f1 \cb3 \'c0\'cc\'b8\'a7\'c0\'cc\'b4\'d9
-\f0 \cb3 . 
-\f1 \cb3 \'bf\'a9\'b1\'e2\'bc\'ad\'b4\'c2
-\f2 \cb3  
-\f1 \cb3 \'c8\'c4\'c0\'da
-\f0 \cb3 , 
-\f1 \cb3 \'c1\'ef
-\f2 \cb3  
-\f1 \cb3 \'c8\'c6\'b9\'ce\'c1\'a4\'c0\'bd\'c0\'cc\'b6\'f3\'b4\'c2
-\f2 \cb3  
-\f1 \cb3 \'c3\'a5\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'bc\'b3\'b8\'ed\'c7\'d1\'b4\'d9
-\f0 \cb3 .",\
-        "1546/10/09");\
-insert into POST (category_seq, user_seq, title, content, datetime)\
-values (1,5,"
-\f1 \cb3 \'bd\'c5\'bb\'e7\'c0\'d3\'b4\'e7\'bf\'a1
-\f2 \cb3  
-\f1 \cb3 \'b4\'eb\'c7\'d8
-\f0 \cb3 ",\
-        "
-\f1 \cb3 \'bd\'c5\'bb\'e7\'c0\'d3\'b4\'e7
-\f0 \cb3  [
-\f1 \cb3 \'e3\'e9\'de\'d4\'ec\'f2\'d3\'d1
-\f0 \cb3 , 1504~1551] 
-\f1 \cb3 \'ba\'bb\'b0\'fc\'c0\'ba
-\f2 \cb3  
-\f1 \cb3 \'c6\'f2\'bb\'ea
-\f0 \cb3 (
-\f1 \cb3 \'f8\'c1\'df\'a3
-\f0 \cb3 )
-\f1 \cb3 \'c0\'cc\'b0\'ed
-\f0 \cb3 , 
-\f1 \cb3 \'c8\'a3\'b4\'c2
-\f2 \cb3  
-\f1 \cb3 \'bb\'e7\'c0\'d3\'b4\'e7
-\f0 \cb3 (
-\f1 \cb3 \'de\'d4\'ec\'f2\'d3\'d1
-\f0 \cb3 :
-\f1 \cb3 \'de\'d6\'ec\'f2\'d3\'d1
-\f0 \cb3 :
-\f1 \cb3 \'de\'d4\'ec\'f4\'d3\'d1
-\f0 \cb3 )\'b7
-\f1 \cb3 \'bd\'c3\'c0\'d3\'b4\'e7
-\f0 \cb3 (
-\f1 \cb3 \'e3\'b8\'ec\'f4\'d3\'d1
-\f0 \cb3 )\'b7
-\f1 \cb3 \'c0\'d3\'bb\'e7\'c0\'e7
-\f0 \cb3 (
-\f1 \cb3 \'ec\'f2\'de\'d4\'ee\'b1
-\f0 \cb3 )
-\f1 \cb3 \'c0\'cc\'b4\'d9
-\f0 \cb3 . 
-\f1 \cb3 \'b0\'ad\'bf\'f8\'b5\'b5
-\f2 \cb3  
-\f1 \cb3 \'b0\'ad\'b8\'aa
-\f0 \cb3 (
-\f1 \cb3 \'cb\'b0\'d7\'d5
-\f0 \cb3 ) 
-\f1 \cb3 \'c3\'e2\'bb\'fd\'c0\'cc\'b8\'e7
-\f0 \cb3 , 
-\f1 \cb3 \'c0\'b2\'b0\'ee
-\f2 \cb3  
-\f1 \cb3 \'c0\'cc\'c0\'cc
-\f0 \cb3 (
-\f1 \cb3 \'d7\'dd\'ec\'b4
-\f0 \cb3 )
-\f1 \cb3 \'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'be\'ee\'b8\'d3\'b4\'cf\'c0\'cc\'b4\'d9
-\f0 \cb3 . 
-\f1 \cb3 \'c8\'bf\'bc\'ba\'c0\'cc
-\f2 \cb3  
-\f1 \cb3 \'c1\'f6\'b1\'d8\'c7\'cf\'b0\'ed
-\f2 \cb3  
-\f1 \cb3 \'c1\'f6\'c1\'b6\'b0\'a1
-\f2 \cb3  
-\f1 \cb3 \'b3\'f4\'be\'d2\'c0\'b8\'b8\'e7
-\f2 \cb3  
-\f1 \cb3 \'be\'ee\'b7\'c1\'bc\'ad\'ba\'ce\'c5\'cd
-\f2 \cb3  
-\f1 \cb3 \'b0\'e6\'b9\'ae
-\f0 \cb3 (
-\f1 \cb3 \'cc\'e8\'d9\'fe
-\f0 \cb3 )
-\f1 \cb3 \'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'c0\'cd\'c8\'f7\'b0\'ed
-\f2 \cb3  
-\f1 \cb3 \'b9\'ae\'c0\'e5
-\f0 \cb3 \'b7
-\f1 \cb3 \'c4\'a7\'b0\'f8
-\f0 \cb3 (
-\f1 \cb3 \'f6\'dc\'cd\'ef
-\f0 \cb3 )\'b7
-\f1 \cb3 \'c0\'da\'bc\'f6
-\f0 \cb3 (
-\f1 \cb3 \'ed\'a9\'e2\'b9
-\f0 \cb3 )
-\f1 \cb3 \'bf\'a1
-\f2 \cb3  
-\f1 \cb3 \'b4\'c9\'c7\'df\'c0\'b8\'b8\'e7
-\f0 \cb3 , 
-\f1 \cb3 \'c6\'af\'c8\'f7
-\f2 \cb3  
-\f1 \cb3 \'bd\'c3\'b9\'ae
-\f0 \cb3 (
-\f1 \cb3 \'e3\'cc\'d9\'fe
-\f0 \cb3 )
-\f1 \cb3 \'b0\'fa
-\f2 \cb3  
-\f1 \cb3 \'b1\'d7\'b8\'b2\'bf\'a1
-\f2 \cb3  
-\f1 \cb3 \'b6\'d9\'be\'ee\'b3\'aa
-\f2 \cb3  
-\f1 \cb3 \'bf\'a9\'b7\'af
-\f2 \cb3  
-\f1 \cb3 \'c6\'ed\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'c7\'d1\'bd\'c3
-\f0 \cb3 (
-\f1 \cb3 \'f9\'d3\'e3\'cc
-\f0 \cb3 ) 
-\f1 \cb3 \'c0\'db\'c7\'b0\'c0\'cc
-\f2 \cb3  
-\f1 \cb3 \'c0\'fc\'c7\'d8\'c1\'f8\'b4\'d9
-\f0 \cb3 . 
-\f1 \cb3 \'b6\'c7\'c7\'d1
-\f2 \cb3  
-\f1 \cb3 \'be\'c8\'b0\'df
-\f0 \cb3 (
-\f1 \cb3 \'e4\'cc\'cc\'b1
-\f0 \cb3 )
-\f1 \cb3 \'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'bf\'b5\'c7\'e2\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'b9\'de\'c0\'ba
-\f2 \cb3  
-\f1 \cb3 \'c8\'ad\'c7\'b3
-\f0 \cb3 (
-\f1 \cb3 \'fb\'fe\'f9\'a6
-\f0 \cb3 )
-\f1 \cb3 \'c0\'ba
-\f2 \cb3  
-\f1 \cb3 \'bf\'a9\'bc\'ba
-\f2 \cb3  
-\f1 \cb3 \'c6\'af\'c0\'af\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'bc\'b6\'bc\'bc
-\f2 \cb3  
-\f1 \cb3 \'c1\'a4\'b9\'a6\'c7\'d4\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'b4\'f5\'c7\'cf\'bf\'a9
-\f2 \cb3  
-\f1 \cb3 \'c7\'d1\'b1\'b9
-\f2 \cb3  
-\f1 \cb3 \'c1\'a6\'c0\'cf\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'bf\'a9\'b7\'f9\'c8\'ad\'b0\'a1\'b6\'f3\'b4\'c2
-\f2 \cb3  
-\f1 \cb3 \'c6\'f2\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'b5\'e8\'b4\'c2\'b4\'d9
-\f0 \cb3 . 
-\f1 \cb3 \'bb\'ea\'bc\'f6
-\f0 \cb3 (
-\f1 \cb3 \'df\'a3\'e2\'a9
-\f0 \cb3 )\'b7
-\f1 \cb3 \'c6\'f7\'b5\'b5
-\f0 \cb3 \'b7
-\f1 \cb3 \'c7\'ae
-\f0 \cb3 \'b7
-\f1 \cb3 \'b9\'fa\'b7\'b9
-\f2 \cb3  
-\f1 \cb3 \'b5\'ee\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'c0\'df
-\f2 \cb3  
-\f1 \cb3 \'b1\'d7\'b7\'c8\'b4\'d9
-\f0 \cb3 . 
-\f1 \cb3 \'c0\'da\'b3\'e0\'b1\'b3\'c0\'b0\'bf\'a1\'b5\'b5
-\f2 \cb3  
-\f1 \cb3 \'b3\'b2\'b4\'d9\'b8\'a5
-\f2 \cb3  
-\f1 \cb3 \'b3\'eb\'b7\'c2\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'b1\'e2\'bf\'ef\'bf\'a9
-\f2 \cb3  
-\f1 \cb3 \'c7\'f6\'b8\'f0\'be\'e7\'c3\'b3
-\f0 \cb3 (
-\f1 \cb3 \'fa\'e7\'d9\'bd\'d5\'de\'f4\'a3
-\f0 \cb3 )
-\f1 \cb3 \'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'b1\'cd\'b0\'a8
-\f0 \cb3 (
-\f1 \cb3 \'d0\'a2\'ca\'fc
-\f0 \cb3 )
-\f1 \cb3 \'c0\'cc
-\f2 \cb3  
-\f1 \cb3 \'b5\'c7\'be\'fa\'b4\'d9
-\f0 \cb3 . 
-\f1 \cb3 \'c0\'cc\'c0\'cc\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'be\'ee\'b8\'d3\'b4\'cf\'c0\'cc\'b4\'d9
-\f0 \cb3 .",\
-        "1504/10/29");\
-insert into POST (category_seq, user_seq, title, content, datetime)\
-values (2, 3,"
-\f1 \cb3 \'bd\'ca\'b8\'b8\'be\'e7\'ba\'b4\'bc\'b3
-\f0 \cb3 ",\
-        "
-\f1 \cb3 \'c0\'cc\'c0\'cc\'b4\'c2
-\f2 \cb3  
-\f1 \cb3 \'bc\'b1\'c1\'b6\'bf\'a1\'b0\'d4
-\f0 \cb3  10
-\f1 \cb3 \'b8\'b8
-\f2 \cb3  
-\f1 \cb3 \'be\'e7\'ba\'b4\'bc\'b3\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'c1\'d6\'c0\'e5\'c7\'cf\'bf\'a9
-\f2 \cb3  
-\f1 \cb3 \'b5\'bf\'c0\'ce\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'b9\'dd\'b0\'a8\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'bb\'e7\'b1\'e2\'b5\'b5
-\f2 \cb3  
-\f1 \cb3 \'c7\'cf\'bf\'b4\'b4\'d9
-\f0 \cb3 .[19] 
-\f1 \cb3 \'b1\'d7\'b4\'c2
-\f2 \cb3  
-\f1 \cb3 \'c0\'cf\'ba\'bb\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'c0\'fc\'b1\'b9\'bd\'c3\'b4\'eb\'b4\'c2
-\f2 \cb3  
-\f1 \cb3 \'c1\'be\'b0\'e1\'b5\'c9
-\f2 \cb3  
-\f1 \cb3 \'b0\'cd\'c0\'cc\'b8\'e7
-\f0 \cb3 , 
-\f1 \cb3 \'c0\'cf\'ba\'bb\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'c5\'eb\'c0\'cf\'c7\'d2
-\f2 \cb3  
-\f1 \cb3 \'b9\'ab\'bb\'e7\'b4\'c2
-\f2 \cb3  
-\f1 \cb3 \'c0\'cf\'ba\'bb
-\f2 \cb3  
-\f1 \cb3 \'b3\'bb
-\f2 \cb3  
-\f1 \cb3 \'bc\'bc\'b7\'c2
-\f2 \cb3  
-\f1 \cb3 \'b3\'bb
-\f2 \cb3  
-\f1 \cb3 \'b0\'a5\'b5\'ee
-\f2 \cb3  
-\f1 \cb3 \'bf\'cf\'c8\'ad\'bf\'cd
-\f2 \cb3  
-\f1 \cb3 \'b1\'b9\'b3\'bb
-\f2 \cb3  
-\f1 \cb3 \'b0\'fc\'bd\'c9\'bb\'e7\'b8\'a6
-\f2 \cb3  
-\f1 \cb3 \'b4\'d9\'b8\'a5
-\f2 \cb3  
-\f1 \cb3 \'b0\'f7\'c0\'b8\'b7\'ce
-\f2 \cb3  
-\f1 \cb3 \'b5\'b9\'b8\'ae\'b1\'e2
-\f2 \cb3  
-\f1 \cb3 \'c0\'a7\'c7\'d1
-\f2 \cb3  
-\f1 \cb3 \'b8\'f1\'c0\'fb\'c0\'b8\'b7\'ce
-\f2 \cb3  
-\f1 \cb3 \'b9\'cc\'b1\'b8\'bf\'a1
-\f2 \cb3  
-\f1 \cb3 \'b8\'ed\'b3\'aa\'b6\'f3\'b3\'aa
-\f2 \cb3  
-\f1 \cb3 \'c1\'b6\'bc\'b1\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'c4\'a7\'b0\'f8\'c7\'d2
-\f2 \cb3  
-\f1 \cb3 \'b0\'cd\'c0\'cc\'b6\'f3\'b0\'ed
-\f2 \cb3  
-\f1 \cb3 \'c1\'d6\'c0\'e5\'c7\'df\'b4\'d9
-\f0 \cb3 . 
-\f1 \cb3 \'c0\'cf\'ba\'bb\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'b5\'b5\'b9\'df\'bf\'a1
-\f2 \cb3  
-\f1 \cb3 \'b4\'eb\'c7\'d1
-\f2 \cb3  
-\f1 \cb3 \'b4\'eb\'c0\'c0\'c0\'b8\'b7\'ce
-\f2 \cb3  
-\f1 \cb3 \'b1\'d7\'b4\'c2
-\f0 \cb3  10
-\f1 \cb3 \'b8\'b8
-\f2 \cb3  
-\f1 \cb3 \'b8\'ed\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'c1\'a4\'ba\'b4\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'be\'e7\'bc\'ba\'c7\'cf\'bf\'a9
-\f2 \cb3  
-\f1 \cb3 \'c0\'cf\'ba\'bb\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'c4\'a7\'b7\'ab\'bf\'a1
-\f2 \cb3  
-\f1 \cb3 \'b4\'eb\'ba\'f1\'c7\'d2
-\f2 \cb3  
-\f1 \cb3 \'b0\'cd\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'b0\'c7\'c0\'c7\'c7\'cf\'bf\'b4\'b4\'d9
-\f0 \cb3 . 
-\f1 \cb3 \'b1\'d7\'b7\'af\'b3\'aa
-\f2 \cb3  
-\f1 \cb3 \'b1\'d7\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'c0\'cc\'b7\'af\'c7\'d1
-\f2 \cb3  
-\f1 \cb3 \'b0\'df\'c7\'d8\'b4\'c2
-\f2 \cb3  
-\f1 \cb3 \'b5\'bf\'c0\'ce\'bf\'a1
-\f2 \cb3  
-\f1 \cb3 \'c0\'c7\'c7\'d8
-\f2 \cb3  
-\f1 \cb3 \'bf\'d5\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'c7\'f6\'c8\'a4\'c7\'cf\'b1\'e2
-\f2 \cb3  
-\f1 \cb3 \'c0\'a7\'c7\'d1
-\f2 \cb3  
-\f1 \cb3 \'b9\'df\'be\'f0\'c0\'b8\'b7\'ce
-\f2 \cb3  
-\f1 \cb3 \'c4\'a1\'ba\'ce\'b5\'c7\'be\'fa\'b0\'ed
-\f0 \cb3 , 
-\f1 \cb3 \'bc\'ad\'c0\'ce\'c1\'b6\'c2\'f7
-\f2 \cb3  
-\f1 \cb3 \'b1\'d7\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'bb\'fd\'b0\'a2\'c0\'cc
-\f2 \cb3  
-\f1 \cb3 \'c1\'f6\'b3\'aa\'c4\'a3
-\f2 \cb3  
-\f1 \cb3 \'bb\'f3\'bb\'f3\'b7\'c2\'b0\'fa
-\f2 \cb3  
-\f1 \cb3 \'c7\'e3\'be\'f0\'c0\'cc\'b6\'f3\'b8\'e7
-\f2 \cb3  
-\f1 \cb3 \'c8\'a3\'c0\'c0\'c7\'d8\'c1\'d6\'c1\'f6
-\f2 \cb3  
-\f1 \cb3 \'be\'ca\'be\'d2\'b4\'d9
-\f0 \cb3 . 
-\f1 \cb3 \'c0\'cc\'c0\'cc\'b0\'a1
-\f0 \cb3  10
-\f1 \cb3 \'b8\'b8
-\f2 \cb3  
-\f1 \cb3 \'be\'e7\'ba\'b4\'bc\'b3\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'c1\'d6\'c0\'e5\'c7\'cf\'b4\'f8
-\f2 \cb3  
-\f1 \cb3 \'b4\'e7\'bd\'c3
-\f0 \cb3 , 
-\f1 \cb3 \'c1\'b6\'bc\'b1\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'c3\'d1
-\f2 \cb3  
-\f1 \cb3 \'ba\'b4\'b7\'c2\'bc\'f6\'b4\'c2
-\f2 \cb3  
-\f1 \cb3 \'c0\'e5\'ba\'ce\'bb\'f3\'c0\'b8\'b7\'ce\'b4\'c2
-\f0 \cb3  30
-\f1 \cb3 \'b8\'b8
-\f2 \cb3  
-\f1 \cb3 \'b8\'ed\'c0\'cc
-\f2 \cb3  
-\f1 \cb3 \'b3\'d1\'be\'fa\'c0\'b8\'b3\'aa
-\f0 \cb3 , 
-\f1 \cb3 \'bd\'c7\'c1\'a6
-\f2 \cb3  
-\f1 \cb3 \'c0\'fc\'c5\'f5
-\f2 \cb3  
-\f1 \cb3 \'b0\'a1\'b4\'c9\'c7\'d1
-\f2 \cb3  
-\f1 \cb3 \'ba\'b4\'b7\'c2
-\f2 \cb3  
-\f1 \cb3 \'bc\'fd\'c0\'da\'b4\'c2
-\f0 \cb3  1,000
-\f1 \cb3 \'b8\'ed
-\f2 \cb3  
-\f1 \cb3 \'c1\'a4\'b5\'b5\'b0\'a1
-\f2 \cb3  
-\f1 \cb3 \'b5\'c7\'be\'fa\'b4\'d9\'b0\'ed
-\f2 \cb3  
-\f1 \cb3 \'c7\'d1\'b4\'d9
-\f0 \cb3 .[20] 1581
-\f1 \cb3 \'b3\'e2
-\f2 \cb3  
-\f1 \cb3 \'b4\'eb\'c1\'a6\'c7\'d0
-\f2 \cb3  
-\f1 \cb3 \'c0\'e7\'c1\'f7
-\f2 \cb3  
-\f1 \cb3 \'c1\'df
-\f2 \cb3  
-\f1 \cb3 \'bf\'c0\'b7\'a7\'b5\'bf\'be\'c8
-\f2 \cb3  
-\f1 \cb3 \'c0\'fa\'bc\'fa\'c7\'cf\'b4\'f8
-\f2 \cb3  
-\f1 \cb3 \'a1\'b6\'b0\'e6\'bf\'ac\'c0\'cf\'b1\'e2\'a1\'b7\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'bf\'cf\'bc\'ba\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'ba\'b8\'be\'d2\'b4\'d9
-\f0 \cb3 . 
-\f1 \cb3 \'bd\'c5\'bb\'e7\'c0\'d3\'b4\'e7\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'be\'c6\'b5\'e9\'c0\'cc\'b4\'d9
-\f0 \cb3 .",\
-        "1483/01/01");\
-\
-select *\
-from MyComment;\
-\
-delete from MyComment where comment_seq = 3;\
-\
-insert into MyComment (post_seq, user_seq, content, datetime, parent)\
-values (1,2, "
-\f1 \cb3 \'c7\'d1\'bb\'ea\'b5\'b5
-\f2 \cb3  
-\f1 \cb3 \'b4\'eb\'c3\'b8
-\f0 \cb3 (
-\f1 \cb3 \'f9\'d8\'df\'a3\'d3\'f6\'d3\'de\'f4\'df
-\f0 \cb3 ) 
-\f1 \cb3 \'c8\'a4\'c0\'ba
-\f2 \cb3  
-\f1 \cb3 \'b0\'df\'b3\'bb\'b7\'ae\'b4\'eb\'c3\'b8
-\f0 \cb3 (
-\f1 \cb3 \'cc\'b8\'d2\'ac\'d5\'d9\'d3\'de\'f4\'df
-\f0 \cb3 )
-\f1 \cb3 \'c0\'ba
-\f0 \cb3  1592
-\f1 \cb3 \'b3\'e2
-\f0 \cb3  8
-\f1 \cb3 \'bf\'f9
-\f0 \cb3  14
-\f1 \cb3 \'c0\'cf
-\f0 \cb3 (
-\f1 \cb3 \'bc\'b1\'c1\'b6
-\f0 \cb3  25
-\f1 \cb3 \'b3\'e2
-\f2 \cb3  
-\f1 \cb3 \'c0\'bd\'b7\'c2
-\f0 \cb3  7
-\f1 \cb3 \'bf\'f9
-\f0 \cb3  8
-\f1 \cb3 \'c0\'cf
-\f0 \cb3 ) 
-\f1 \cb3 \'c5\'eb\'bf\'b5
-\f2 \cb3  
-\f1 \cb3 \'c7\'d1\'bb\'ea\'b5\'b5
-\f2 \cb3  
-\f1 \cb3 \'be\'d5\'b9\'d9\'b4\'d9\'bf\'a1\'bc\'ad
-\f2 \cb3  
-\f1 \cb3 \'c1\'b6\'bc\'b1
-\f2 \cb3  
-\f1 \cb3 \'bc\'f6\'b1\'ba\'c0\'cc
-\f2 \cb3  
-\f1 \cb3 \'bf\'d6\'b1\'ba\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'c5\'a9\'b0\'d4
-\f2 \cb3  
-\f1 \cb3 \'b9\'ab\'c2\'ee\'b8\'a5
-\f2 \cb3  
-\f1 \cb3 \'c7\'d8\'c0\'fc
-\f0 \cb3 ", "2022/05/01", null);\
-insert into MyComment (post_seq, user_seq, content, datetime, parent)\
-values (1,3, "
-\f1 \cb3 \'c0\'cc
-\f2 \cb3  
-\f1 \cb3 \'c0\'fc\'c5\'f5\'bf\'a1\'bc\'ad
-\f2 \cb3  
-\f1 \cb3 \'c0\'b0\'c0\'fc\'bf\'a1\'bc\'ad
-\f2 \cb3  
-\f1 \cb3 \'bb\'e7\'bf\'eb\'c7\'cf\'b4\'f8
-\f2 \cb3  
-\f1 \cb3 \'c6\'f7\'c0\'a7
-\f2 \cb3  
-\f1 \cb3 \'bc\'b6\'b8\'ea
-\f2 \cb3  
-\f1 \cb3 \'c0\'fc\'bc\'fa
-\f2 \cb3  
-\f1 \cb3 \'c7\'fc\'c5\'c2\'c0\'ce
-\f2 \cb3  
-\f1 \cb3 \'c7\'d0\'c0\'cd\'c1\'f8\'c0\'bb
-\f2 \cb3  
-\f1 \cb3 \'c3\'b3\'c0\'bd\'c0\'b8\'b7\'ce
-\f2 \cb3  
-\f1 \cb3 \'c7\'d8\'c0\'fc\'bf\'a1\'bc\'ad
-\f2 \cb3  
-\f1 \cb3 \'c6\'ee\'c3\'c6\'b4\'d9
-\f0 \cb3 .", "2022/05/01", 1);\
-insert into MyComment (post_seq, user_seq, content, datetime, parent)\
-values (3,2, "
-\f1 \cb3 \'c0\'cc\'be\'c6\'c0\'cc\'c0\'c7
-\f2 \cb3  
-\f1 \cb3 \'be\'ee\'b8\'d3\'b4\'cf\'b4\'c2
-\f2 \cb3  
-\f1 \cb3 \'bd\'c5\'bb\'e7\'c0\'d3\'b4\'e7
-\f0 \cb3 ", "2022/05/01", null);\
-insert into MyComment (post_seq, user_seq, content, datetime, parent)\
-values (2,1, "
-\f1 \cb3 \'b0\'a1\'b3\'aa\'b4\'d9\'b6\'f3\'b8\'b6\'b9\'d9\'bb\'e7
-\f0 \cb3 ", "2022/05/01", null);\
-\
-show tables;\
-\
--- Q6.\
-select name\
-from Category;\
-\
--- Q7.\
-select *\
-from MyComment\
-where parent is not null;\
-\
--- Q8.\
-select content, id, user_name\
-from POST as P\
-join MyUser U on P.user_seq = U.user_seq\
-where P.content like "%
-\f1 \cb3 \'bd\'c5\'bb\'e7\'c0\'d3\'b4\'e7
-\f0 \cb3 %" or U.user_name like "%
-\f1 \cb3 \'bd\'c5\'bb\'e7\'c0\'d3\'b4\'e7
-\f0 \cb3 %";\
-\
--- Q9.\
-select Ca.name, P.post_seq, P.title, U.user_name, P.datetime, 
-\f3\i \cb3 count
-\f0\i0 \cb3 (M.content)\
-from POST P\
-join Category Ca on P.category_seq = Ca.category_seq\
-join MyUser U on P.user_seq = U.user_seq\
-join MyComment M on P.post_seq = M.post_seq\
-group by M.post_seq;\
-\
--- Q10.\
-UPDATE POST\
-SET category_seq = 3\
-WHERE post_seq = 3;\
-\
--- 10
-\f1 \cb3 \'b9\'f8\'c0\'ba
-\f2 \cb3  
-\f1 \cb3 \'c8\'ae\'c0\'ce
-\f2 \cb3  
-\f1 \cb3 \'b9\'de\'be\'d2\'bd\'c0\'b4\'cf\'b4\'d9
-\f0 \cb3 !\
-}
+create table POST (
+    post_seq int(8) auto_increment,
+    category_seq int(8),
+    user_seq int(8),
+    title varchar(40),
+    content varchar(4000),
+    datetime date,
+    primary key (post_seq),
+    FOREIGN KEY (category_seq) REFERENCES Category (category_seq),
+    FOREIGN KEY (user_seq) REFERENCES MyUser (user_seq)
+);
+
+create table MyComment (
+    comment_seq int(8) auto_increment,
+    post_seq int(8),
+    user_seq int(8),
+    content varchar(4000),
+    datetime date,
+    parent int(8),
+    primary key (comment_seq),
+    foreign key (post_seq) references POST (category_seq),
+    foreign key (user_seq) references MyUser (user_seq),
+    foreign key (parent) references MyComment (comment_seq)
+);
+
+-- 값 삽입
+
+select *
+from MyUser;
+
+insert into MyUser (id, user_name, datetime)
+values ("lee1545", "이순신", "22/05/04");
+insert into MyUser (id, user_name, datetime)
+values ("lee1502", "이황", "22/05/01");
+insert into MyUser (id, user_name, datetime)
+values ("lee1536", "이이", "22/05/02");
+insert into MyUser (id, user_name, datetime)
+values ("lee1397", "세종대왕", "22/05/03");
+insert into MyUser (id, user_name, datetime)
+values ("shin1504", "신사임당", "22/05/05");
+
+select *
+from Category;
+
+insert into Category (name)
+values ("공지");
+insert into Category (name)
+values ("뉴스");
+insert into Category (name)
+values ("대화마당");
+
+select *
+from POST;
+
+insert into POST (category_seq, user_seq, title, content, datetime)
+values (1,1,"학익진 진법",
+        "기본은 전사에서 기진奇陣으로 유명한 망치와 모루(핀서 클로우)의 전법에서 내려치는 망치를 2개로 하여 우회와 포위를 겹으로 구사하는 방법이다. 한니발 바르카가 칸나이 전투에서 우수한 기동 기마군 2부대를 이용하고 자신의 백전연마 노장들을 모루로 사용하여 승리를 거뒀던 전법이다. 서양인들은 이를 흔히 이중포위라 부르지만 실은 학익진 기본에 예비군단 2개를 추가로 운용하여 포위진을 완성시킨 형태다. 즉, 이것은 어디까지나 우월한 기마병의 기동성을 이용한 육상의 진법이란 것이다.",
+        "1592/08/14");
+insert into POST (category_seq, user_seq, title, content, datetime)
+values (3,4,"훈민정음",
+        "훈민정음(訓民正音)은 백성을 가르치는 바른 소리라는 뜻이다. 훈민정음이라고 부르는 대상은 두 가지가 있는데, 그 하나는 1443년 음력 12월(양력 1444년 1월)에 세종대왕이 만든 한국어의 표기 체계, 즉 오늘날의 한글을 창제 당시에 부른 이름이고, 또 하나는 1446년 9월[1]에 발간된 책 이름이다. 여기서는 후자, 즉 훈민정음이라는 책을 설명한다.",
+        "1546/10/09");
+insert into POST (category_seq, user_seq, title, content, datetime)
+values (1,5,"신사임당에 대해",
+        "신사임당 [申師任堂, 1504~1551] 본관은 평산(平山)이고, 호는 사임당(師任堂:思任堂:師妊堂)·시임당(媤妊堂)·임사재(任師齋)이다. 강원도 강릉(江陵) 출생이며, 율곡 이이(李珥)의 어머니이다. 효성이 지극하고 지조가 높았으며 어려서부터 경문(經文)을 익히고 문장·침공(針工)·자수(刺繡)에 능했으며, 특히 시문(詩文)과 그림에 뛰어나 여러 편의 한시(漢詩) 작품이 전해진다. 또한 안견(安堅)의 영향을 받은 화풍(畵風)은 여성 특유의 섬세 정묘함을 더하여 한국 제일의 여류화가라는 평을 듣는다. 산수(山水)·포도·풀·벌레 등을 잘 그렸다. 자녀교육에도 남다른 노력을 기울여 현모양처(賢母良妻)의 귀감(龜鑑)이 되었다. 이이의 어머니이다.",
+        "1504/10/29");
+insert into POST (category_seq, user_seq, title, content, datetime)
+values (2, 3,"십만양병설",
+        "이이는 선조에게 10만 양병설을 주장하여 동인의 반감을 사기도 하였다.[19] 그는 일본의 전국시대는 종결될 것이며, 일본을 통일할 무사는 일본 내 세력 내 갈등 완화와 국내 관심사를 다른 곳으로 돌리기 위한 목적으로 미구에 명나라나 조선을 침공할 것이라고 주장했다. 일본의 도발에 대한 대응으로 그는 10만 명의 정병을 양성하여 일본의 침략에 대비할 것을 건의하였다. 그러나 그의 이러한 견해는 동인에 의해 왕을 현혹하기 위한 발언으로 치부되었고, 서인조차 그의 생각이 지나친 상상력과 허언이라며 호응해주지 않았다. 이이가 10만 양병설을 주장하던 당시, 조선의 총 병력수는 장부상으로는 30만 명이 넘었으나, 실제 전투 가능한 병력 숫자는 1,000명 정도가 되었다고 한다.[20] 1581년 대제학 재직 중 오랫동안 저술하던 《경연일기》의 완성을 보았다. 신사임당의 아들이다.",
+        "1483/01/01");
+
+select *
+from MyComment;
+
+delete from MyComment where comment_seq = 3;
+
+insert into MyComment (post_seq, user_seq, content, datetime, parent)
+values (1,2, "한산도 대첩(閑山島大捷) 혹은 견내량대첩(見乃梁大捷)은 1592년 8월 14일(선조 25년 음력 7월 8일) 통영 한산도 앞바다에서 조선 수군이 왜군을 크게 무찌른 해전", "2022/05/01", null);
+insert into MyComment (post_seq, user_seq, content, datetime, parent)
+values (1,3, "이 전투에서 육전에서 사용하던 포위 섬멸 전술 형태인 학익진을 처음으로 해전에서 펼쳤다.", "2022/05/01", 1);
+insert into MyComment (post_seq, user_seq, content, datetime, parent)
+values (3,2, "이아이의 어머니는 신사임당", "2022/05/01", null);
+insert into MyComment (post_seq, user_seq, content, datetime, parent)
+values (2,1, "가나다라마바사", "2022/05/01", null);
+
+show tables;
+
+-- Q6.
+select name
+from Category;
+
+-- Q7.
+select *
+from MyComment
+where parent is not null;
+
+-- Q8.
+select content, id, user_name
+from POST as P
+join MyUser U on P.user_seq = U.user_seq
+where P.content like "%신사임당%" or U.user_name like "%신사임당%";
+
+-- Q9.
+select Ca.name, P.post_seq, P.title, U.user_name, P.datetime, count(M.content)
+from POST P
+join Category Ca on P.category_seq = Ca.category_seq
+join MyUser U on P.user_seq = U.user_seq
+join MyComment M on P.post_seq = M.post_seq
+group by M.post_seq;
+
+-- Q10.
+UPDATE POST
+SET category_seq = 3
+WHERE post_seq = 3;
+
+-- 10번은 확인 받았습니다!
+
